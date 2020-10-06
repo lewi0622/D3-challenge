@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
+var margin = {top: 10, right: 30, bottom: 60, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -29,12 +29,27 @@ d3.csv("assets/data/data.csv").then(function(data) {
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
+    // Add X label
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height + 40)
+        .text("Poverty (%)");
+
     // Add Y axis
     var y = d3.scaleLinear()
         .domain(d3.extent(data, d => d.healthcare))
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
+
+    // Add Y label
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .attr("x", (height / 2) * -1)
+        .attr("dy", -40)
+        .text("Healthcare (%)")
 
     // create dots variable
     var gdots = svg.selectAll("g.dot")
@@ -57,8 +72,6 @@ d3.csv("assets/data/data.csv").then(function(data) {
         .attr("dx", -5)
         .attr("dy", 2)
         .style("font-size", "7px");
-
-
 
 //Catch error
 }).catch(e => {
