@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 60, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 600 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#scatter")
@@ -49,7 +49,7 @@ d3.csv("assets/data/data.csv").then(function(data) {
         .attr("transform", "rotate(-90)")
         .attr("x", (height / 2) * -1)
         .attr("dy", -40)
-        .text("Healthcare (%)")
+        .text("Healthcare (%)");
 
     // create dots variable
     var gdots = svg.selectAll("g.dot")
